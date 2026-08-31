@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Adrian Lee — Engineer</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #1a1a1a;
+            background: #ffffff;
+            line-height: 1.6;
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 28px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+
+        nav a {
+            color: #1a1a1a;
+            text-decoration: none;
+            margin-left: 28px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            max-width: 1100px;
+            margin: 80px auto 120px;
+            padding: 0 30px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 7vw, 6rem);
+            line-height: 1;
+            margin: 0 0 30px;
+            max-width: 900px;
+            letter-spacing: -0.04em;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 650px;
+            color: #555;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 22px;
+            background: #1a1a1a;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        section {
+            max-width: 1100px;
+            margin: 0 auto 120px;
+            padding: 0 30px;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #777;
+            margin-bottom: 40px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .project {
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .project h3 {
+            font-size: 1.7rem;
+            margin: 0 0 8px;
+        }
+
+        .project p {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .about {
+            max-width: 750px;
+            font-size: 1.25rem;
+        }
+
+        footer {
+            border-top: 1px solid #ddd;
+            padding: 40px 30px;
+            color: #777;
+        }
+
+        @media (max-width: 700px) {
+            nav {
+                align-items: flex-start;
+            }
+
+            nav div:last-child {
+                display: none;
+            }
+
+            .hero {
+                margin-top: 50px;
+            }
+
+            .projects {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">ADRIAN LEE</div>
+
+        <div>
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <main>
+
+        <section class="hero">
+            <h1>Engineer.<br>Designer.<br>Builder.</h1>
+
+            <p>
+                Engineering work spanning aircraft design, aerodynamics,
+                UAVs, mechanical systems, and numerical analysis.
+            </p>
+
+            <a class="button" href="#work">View my work →</a>
+        </section>
+
+
+        <section id="work">
+
+            <div class="section-title">Selected Work</div>
+
+            <div class="projects">
+
+                <article class="project">
+                    <h3>teTra SN5</h3>
+                    <p>
+                        eVTOL aircraft design, aerodynamic development,
+                        and engineering analysis.
+                    </p>
+                </article>
+
+                <article class="project">
+                    <h3>Gemini Bicopter</h3>
+                    <p>
+                        UAV design and development.
+                    </p>
+                </article>
+
+                <article class="project">
+                    <h3>Mozzie</h3>
+                    <p>
+                        STOL cargo UAV design and development.
+                    </p>
+                </article>
+
+                <article class="project">
+                    <h3>Perseverance Rover</h3>
+                    <p>
+                        Mechanical and systems engineering project.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+
+        <section id="about">
+
+            <div class="section-title">About</div>
+
+            <div class="about">
+                <p>
+                    I am an engineer interested in the design and development
+                    of aircraft, UAVs, and mechanical systems.
+                </p>
+
+                <p>
+                    My work combines analytical engineering with CAD,
+                    simulation, numerical methods, and hands-on development.
+                </p>
+            </div>
+
+        </section>
+
+
+        <section id="contact">
+
+            <div class="section-title">Contact</div>
+
+            <p>
+                Interested in my work?
+            </p>
+
+            <p>
+                <a href="mailto:YOUR-EMAIL-HERE">YOUR-EMAIL-HERE</a>
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        © Adrian Lee
+    </footer>
+
+</body>
+</html>
