@@ -3,78 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adrian Lee | Aerospace</title>
+    <title>Adrian Lee | Aerospace Engineering</title>
     <style>
         :root {
-            --phosphor: #33ff00; /* Classic terminal green */
-            --bg: #050505;
+            --bg-base: #07090f;
+            --bg-panel: rgba(16, 22, 34, 0.8);
+            --cyan: #00f0ff;
+            --magenta: #ff003c;
+            --text-main: #e0e6ed;
+            --text-muted: #8b9bb4;
+            --wireframe-border: 1px solid rgba(0, 240, 255, 0.2);
         }
+
         body {
-            background-color: var(--bg);
-            color: var(--phosphor);
-            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 2rem;
-            overflow: hidden;
+            padding: 0;
+            line-height: 1.6;
         }
-        /* CRT Scanline Overlay */
+
+        /* Subtle Modern Scanlines */
         .scanlines {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(
-                to bottom,
-                rgba(255,255,255,0),
-                rgba(255,255,255,0) 50%,
-                rgba(0,0,0,0.2) 50%,
-                rgba(0,0,0,0.2)
-            );
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%);
             background-size: 100% 4px;
             pointer-events: none;
-            z-index: 50;
+            z-index: 9999;
         }
-        /* Glowing Wireframe Container */
-        .terminal-window {
-            border: 2px solid var(--phosphor);
-            box-shadow: 0 0 10px var(--phosphor), inset 0 0 10px var(--phosphor);
-            padding: 20px;
-            height: 80vh;
-            text-shadow: 0 0 5px var(--phosphor);
+
+        /* Layout Container */
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 30px;
             position: relative;
+            z-index: 10;
         }
-        h1 { 
-            text-transform: uppercase; 
-            border-bottom: 1px solid var(--phosphor); 
-            padding-bottom: 10px;
+
+        /* Left Sidebar / Profile */
+        .sidebar {
+            background: var(--bg-panel);
+            border: var(--wireframe-border);
+            padding: 25px;
+            height: fit-content;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.05);
         }
-        a { 
-            color: var(--phosphor); 
-            text-decoration: none; 
-            border: 1px solid var(--phosphor);
-            padding: 5px 10px;
-            margin-right: 10px;
-            transition: all 0.2s;
+
+        .sidebar h1 {
+            color: var(--cyan);
+            font-size: 1.5rem;
+            margin-top: 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
-        a:hover { 
-            background-color: var(--phosphor); 
-            color: var(--bg); 
-            box-shadow: 0 0 15px var(--phosphor);
+
+        .sidebar h2 {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .sys-data {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 20px 0;
+            border-left: 2px solid var(--magenta);
+            padding-left: 10px;
+        }
+
+        /* Main Content Area */
+        .main-feed {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Project Card Template */
+        .project-card {
+            background: var(--bg-panel);
+            border: var(--wireframe-border);
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+        }
+
+        /* Decorative corner markers for the wireframe look */
+        .project-card::before, .project-card::after {
+            content: ''; position: absolute; width: 10px; height: 10px;
+            border: 2px solid var(--cyan);
+        }
+        .project-card::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+        .project-card::after { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+        .project-title {
+            color: #fff;
+            margin: 0 0 10px 0;
+            font-size: 1.4rem;
+        }
+
+        .tech-tags {
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--cyan);
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+        }
+
+        .tech-tags span {
+            background: rgba(0, 240, 255, 0.1);
+            padding: 3px 8px;
+            margin-right: 8px;
+            border-radius: 3px;
+        }
+
+        .project-image-placeholder {
+            width: 100%;
+            height: 250px;
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px dashed rgba(0, 240, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: monospace;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* Media Query for Mobile */
+        @media (max-width: 768px) {
+            .dashboard { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="scanlines"></div>
-    <div class="terminal-window">
-        <h1>Adrian_Lee.exe</h1>
-        <p>> SYSTEM: ONLINE</p>
-        <p>> LOCATION: MUNICH_GERMANY</p>
-        <p>> ROLE: AEROSPACE_ENGINEERING_MS</p>
-        <p>> CURRENT_TASK: FLIGHT_DYNAMIC_MODELING</p>
-        <br>
-        <p>
-            <a href="#">[ LOAD_PROJECTS ]</a> 
-            <a href="#">[ VIEW_RESUME ]</a> 
-            <a href="#">[ INIT_CONTACT ]</a>
-        </p>
+    
+    <div class="dashboard">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h1>Adrian Lee</h1>
+            <h2>Aerospace Engineering</h2>
+            
+            <div class="sys-data">
+                <div>> LOC: Munich, Germany</div>
+                <div>> EDU: TUM (M.Sc.) | UC Davis</div>
+                <div>> STAT: Online</div>
+            </div>
+
+            <p style="font-size: 0.9rem;">Specializing in flight dynamic modeling, 6-DOF simulations, trajectory optimization, and UAV design.</p>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-feed">
+            
+            <!-- PROJECT 1: Master's Thesis -->
+            <article class="project-card">
+                <h3 class="project-title">High-Subsonic UAV Dynamic Modeling</h3>
+                <div class="tech-tags">
+                    <span>MATLAB</span> <span>Simulink</span> <span>6-DOF</span>
+                </div>
+                <!-- To add a real image, replace the div below with: <img src="images/uav-sim.jpg" style="width: 100%; border: var(--wireframe-border); margin-bottom: 20px;"> -->
+                <div class="project-image-placeholder">
+                    [ WIREFRAME_RENDER_PLACEHOLDER ]
+                </div>
+                <p>Master's thesis research focused on dynamic modeling, trajectory optimization, and subset simulation for high-subsonic unmanned aerial vehicles.</p>
+            </article>
+
+            <!-- PROJECT 2: Phantum Weasel -->
+            <article class="project-card">
+                <h3 class="project-title">Phantum Weasel UAV</h3>
+                <div class="tech-tags">
+                    <span>V-n Diagrams</span> <span>Energy-Maneuverability</span>
+                </div>
+                <div class="project-image-placeholder">
+                    [ DOGHOUSE_PLOT_PLACEHOLDER ]
+                </div>
+                <p>Semester thesis work for the TUM Phantum project team. Developed doghouse plots and comprehensive energy-maneuverability analyses to optimize UAV design parameters.</p>
+            </article>
+
+            <!-- PROJECT 3: teTra Aviation -->
+            <article class="project-card">
+                <h3 class="project-title">teTra Aviation Corp. SN5 eVTOL</h3>
+                <div class="tech-tags">
+                    <span>Aerodynamics</span> <span>Tandem Wing</span>
+                </div>
+                <div class="project-image-placeholder">
+                    [ SN5_WIREFRAME_PLACEHOLDER ]
+                </div>
+                <p>Refined the aerodynamic design for a personal kit eVTOL aircraft. Implemented airframe modifications to a tandem wing configuration to maximize safety and hover efficiency across distributed lifting surfaces.</p>
+            </article>
+
+        </main>
     </div>
 </body>
 </html>
